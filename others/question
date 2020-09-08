@@ -1,0 +1,11 @@
+-- parser exercise
+
+a=4
+a::a->String->Integer
+
+b=6
+b::b->String->Integer
+where b=[Ord 0;Ord 9]
+
+if input==(@)
+  print("This is an error.")
