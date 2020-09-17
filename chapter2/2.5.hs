@@ -1,5 +1,13 @@
---Exercises: Comprehension check
--- 1)
+-- Exercises: Comprehension check
+
+-- 1) 
+half x = x / 2
+halfhalf x = half x / (x / 2)
+
+square x = x * x 
+squareroot x = sqrt (square x)
+
+-- 2)
 triple x = x * 3
 {- Output:
   *Main> half x = x /2
@@ -13,7 +21,7 @@ triple x = x * 3
 -}
 
 -- 2)
-square p = 3.14 * (p * p)
+squarepie p = 3.14 * (p * p)
 
 -- 3)
 square2 p = pi * (p * p)

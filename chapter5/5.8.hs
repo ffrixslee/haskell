@@ -1,5 +1,9 @@
-{-# LANGUAGE NoMonomorphismRestriction #-}
-module DetermineTheType where
--- simple example
-example = (length [1, 2, 3, 4]) > (length "TACOCAT") 
--- If you do not include the NoMonomorphismRestriction extension, example would have the type Integer instead of Num a => a.
+module Arith3Broken where
+
+main :: IO()
+main = do
+    print (1 + 2)
+    putStrLn "10"
+    print (negate (-1))
+    print ((+) 0 blah)
+           where blah = negate 1
