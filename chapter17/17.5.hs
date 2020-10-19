@@ -54,3 +54,17 @@ y = lookup 2 $ zip xs ys
 summed :: Maybe Integer  
 summed = fmap sum $ (,) <$> x <*> y 
 -}
+
+-- helloWorld = const <$> Just "Hello" <*> pure "World"
+
+{-
+test = (,,,) <$> Just 90 <*> Just 10 <*> Just "Tierness" <*> pure[1, 2, 3]
+-}
+
+module BadMonoid where
+
+import Data.Monoid
+import Test.QuickCheck
+import Test.QuickCheck.Checkers
+import Test.QuickCheck.Classes
+
