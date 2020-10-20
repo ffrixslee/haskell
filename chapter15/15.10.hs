@@ -1,12 +1,18 @@
+module Optional where
+
+import Data.Monoid
+
 data Optional a =
     Nada
   | Only a
-  deriving (Eq, Show)
+    deriving (Eq, Show)
 
-instance Semigroup (Optional a) where
-    (<>) Nada _ = Nada
-    (<>) _ Nada = Nada
-    (<>) Only a _ = Only a
+-- Haskell changed: Monoid's require a Semigroup instance too.
+instance Semigroup a => Semigroup (Optional a) where
+   (<>) Nada y = y
+   (<>) x Nada = x
+   (<>) (Only x) (Only y) = Only (x <> y)
 
-instance Monoid (Semigroup) where
-    mempty = Only a
+instance Monoid a => Monoid (Optional a) where
+    mempty = Nada
+ 
