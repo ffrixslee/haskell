@@ -15,3 +15,6 @@ eftInt = eft
 eftChar :: Char -> Char -> [Char]
 eftChar = eft
 
+
+
+
