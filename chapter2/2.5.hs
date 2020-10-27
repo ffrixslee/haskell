@@ -21,7 +21,7 @@ triple x = x * 3
 -}
 
 -- 2)
-squarepie p = 3.14 * (p * p)
+squarePie p = 3.14 * (p * p)
 
 -- 3)
 square2 p = pi * (p * p)
