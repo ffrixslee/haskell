@@ -18,9 +18,9 @@ morseGen = elements allowedMorse
 
 prop_thereAndBackAgain :: Property
 prop_thereAndBackAgain =
- forAll charGen
- (\c -> ((charToMorse c)
-   >>= morseToChar) == Just c)
-   
+    forAll charGen
+    (\c -> ((charToMorse c)
+     >>= morseToChar) == Just c)
+
 main :: IO ()
 main = quickCheck prop_thereAndBackAgain

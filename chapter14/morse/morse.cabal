@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ecf1d7cd7587ea277b0030a63da4b0831a4610f48ab9067aef6f2d474bbbf1c7
+-- hash: 958c0e9b040288f411b89b0dd036848fcf841a2609cce8545daafcf9b65dd9bb
 
 name:           morse
 version:        0.1.0.0
@@ -17,6 +17,7 @@ copyright:      2020 Author name here
 license:        BSD3
 license-file:   LICENSE
 build-type:     Simple
+category:       Text
 
 extra-source-files:
     README.md
@@ -29,30 +30,33 @@ source-repository head
 library
   exposed-modules:
       Morse
+  ghc-options:
+      -Wall -fwarn-tabs
   other-modules:
       Paths_morse
   hs-source-dirs:
       src
-  ghc-options: -Wall -fwarn-tabs
   build-depends:
       base >=4.7 && <5
-      , containers
-      , QuickCheck
+    , containers
+    , QuickCheck
   default-language: Haskell2010
 
-executable morse-exe
+executable morse
   main-is: Main.hs
   other-modules:
-      Morse
       Paths_morse
+      , Morse
   hs-source-dirs:
       src
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -fwarn-tabs
+  ghc-options: 
+      -threaded -rtsopts -with-rtsopts=-N
+      -Wall -fwarn-tabs
   build-depends:
-      QuickCheck
-    , base >=4.7 && <5
+      base >=4.7 && <5
     , containers
     , morse
+    , QuickCheck
   default-language: Haskell2010
 
 test-suite morse-test
@@ -62,10 +66,10 @@ test-suite morse-test
       Paths_morse
   hs-source-dirs:
       test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall -fno-warn-orphans
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      QuickCheck
-    , base
-    , containers
+      base >=4.7 && <5
     , morse
+    , containers
+    , QuickCheck
   default-language: Haskell2010

@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/1443e9026e18fada11eef2dab7780899c3786e1a7e351f775472d42b0430f0e0/8.8.4/bin"
-libdir     = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/1443e9026e18fada11eef2dab7780899c3786e1a7e351f775472d42b0430f0e0/8.8.4/lib/x86_64-osx-ghc-8.8.4/addition-0.1.0.0-42ImAsvR477EtaAHY6j0ki"
-dynlibdir  = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/1443e9026e18fada11eef2dab7780899c3786e1a7e351f775472d42b0430f0e0/8.8.4/lib/x86_64-osx-ghc-8.8.4"
-datadir    = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/1443e9026e18fada11eef2dab7780899c3786e1a7e351f775472d42b0430f0e0/8.8.4/share/x86_64-osx-ghc-8.8.4/addition-0.1.0.0"
-libexecdir = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/1443e9026e18fada11eef2dab7780899c3786e1a7e351f775472d42b0430f0e0/8.8.4/libexec/x86_64-osx-ghc-8.8.4/addition-0.1.0.0"
-sysconfdir = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/1443e9026e18fada11eef2dab7780899c3786e1a7e351f775472d42b0430f0e0/8.8.4/etc"
+bindir     = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/4d36b24e4111845ddb633eb0dcf938c03c11aa082a40098436187cd337ad7592/8.8.4/bin"
+libdir     = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/4d36b24e4111845ddb633eb0dcf938c03c11aa082a40098436187cd337ad7592/8.8.4/lib/x86_64-osx-ghc-8.8.4/addition-0.1.0.0-42ImAsvR477EtaAHY6j0ki"
+dynlibdir  = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/4d36b24e4111845ddb633eb0dcf938c03c11aa082a40098436187cd337ad7592/8.8.4/lib/x86_64-osx-ghc-8.8.4"
+datadir    = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/4d36b24e4111845ddb633eb0dcf938c03c11aa082a40098436187cd337ad7592/8.8.4/share/x86_64-osx-ghc-8.8.4/addition-0.1.0.0"
+libexecdir = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/4d36b24e4111845ddb633eb0dcf938c03c11aa082a40098436187cd337ad7592/8.8.4/libexec/x86_64-osx-ghc-8.8.4/addition-0.1.0.0"
+sysconfdir = "/Users/nurliyana/haskell/chapter14/addition/.stack-work/install/x86_64-osx/4d36b24e4111845ddb633eb0dcf938c03c11aa082a40098436187cd337ad7592/8.8.4/etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "addition_bindir") (\_ -> return bindir)

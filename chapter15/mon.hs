@@ -7,7 +7,7 @@ import Test.QuickCheck
 data Bull = 
       Fools
     | Twoo
-    deribing (Eq, Show)
+    describing (Eq, Show)
 
 instance Arbitrary Bull where
   arbitrary =
@@ -25,6 +25,7 @@ main = do
   let ma = monoidAssoc
       mli = monoidLeftIdentity
       mri = monoidRightIdentity
+
 quickCheck (ma :: BullMappend)
 quickCheck (mli :: Bull -> Bool)
 quickCheck (mri :: Bull -> Bool)

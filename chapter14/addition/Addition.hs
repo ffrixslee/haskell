@@ -1,40 +1,37 @@
 module Addition where
 
+import Test.Hspec
 import Test.QuickCheck
---import Test.Hspec
-
---sayHello :: IO ()
---sayHello = putStrLn "hello!"
 
 {-
+sayHello :: IO()
+sayHello = putStrLn "hello!"
+-}
+
 main :: IO ()
 main = hspec $ do
-  describe "Addition" $ do
-    it "x + 1 is always\
-         \ greater than x" $ do
-        property $ \x -> x + 1 > (x :: Int)
-    it "3 multiplied by 2 is 6" $ do
-        mult1 3 2 `shouldBe` 6
-    it "10 multiplied by 3 is 30" $ do
-        mult1 10 3 `shouldBe` 30
-    it "15 divided by 3 is 5" $ do
-        dividedBy 15 3 `shouldBe` (5,0)
-    it "22 divided by 5 is\
-         \ 4 remainder 2" $ do
-         dividedBy 22 5 `shouldBe` (4, 2)
-    it "1 + 1 is greater than 1" $ do
-      (1 + 1) > 1 `shouldBe` True
-    it "2 + 2 is equal to 4" $ do
-      2 + 2 `shouldBe` 4
--}
+    describe "Addition" $ do 
+        it "1 + 1 is greater than 1" $ do
+            (1 + 1) > 1 `shouldBe` True
+        it "2 + 2 is equal to 4" $ do
+            2 + 2 `shouldBe` 4
+        it "15 dividedBy 3 is 5" $ do
+            dividedBy 15 3 `shouldBe` (5,0)
+        it "22 divided by 5 is\
+            \ 4 remainder 2" $ do
+            dividedBy 22 5 `shouldBe` (4,2)
+        it "3 multiplied by 2 is 6" $ do
+            mult1 3 2 `shouldBe` 6
+        it "x + 1 is always\
+            \ greater than x" $ do
+            property $ \x -> x + 1 > (x :: Int)
 
 dividedBy :: Integral a => a -> a -> (a, a)
 dividedBy num denom = go num denom 0
     where go n d count
-           | n < d = (count, n)
-           | otherwise =
+            | n < d = (count, n)
+            | otherwise =
                 go (n - d) d (count + 1)
-
 
 mult1 :: (Integral a) => a -> a -> a
 mult1 x y = go x y
@@ -45,12 +42,13 @@ mult1 x y = go x y
 trivialInt :: Gen Int
 trivialInt = return 1
 
-oneThroughThree :: Gen Int
-oneThroughThree = elements [1,2,3]
+--return :: Monad m => a -> m a
 
-oneThroughThree' :: Gen Int
-oneThroughThree' = 
-    elements [1, 2, 2, 2, 2, 3]
+-- when m is Gen:
+-- return :: a -> Gen a
+
+oneThroughThree :: Gen Int
+oneThroughThree = elements [1, 2, 2, 2, 3]
 
 genBool :: Gen Bool
 genBool = choose (False, True)
@@ -67,23 +65,22 @@ genChar = elements ['a'..'z']
 genTuple :: (Arbitrary a, Arbitrary b)
          => Gen (a, b)
 genTuple = do
-  a <- arbitrary
-  b <- arbitrary
-  return (a, b)
+    a <- arbitrary
+    b <- arbitrary
+    return (a, b)
 
-genThreeple :: (Arbitrary a, Arbitrary b, 
-                Arbitrary c)
+genThreeple :: (Arbitrary a, Arbitrary b, Arbitrary c)
             => Gen (a, b, c)
-
-genThreeple = do
-  a <- arbitrary
-  b <- arbitrary
-  c <- arbitrary
-  return (a, b, c)
+genThreeple = do 
+    a <- arbitrary
+    b <- arbitrary
+    c <- arbitrary
+    return (a, b, c)
 
 --type G = Gen (Int, Float)
-
---type G = Gen ([()], Char)
+--type G = Gen (Int, String, Float)
+--type G = Gen (Either Int Float)
+--type G = Gen (Maybe Float)
 
 genEither :: (Arbitrary a, Arbitrary b)
           => Gen (Either a b)
@@ -94,20 +91,19 @@ genEither = do
 
 -- equal probability
 genMaybe :: Arbitrary a => Gen (Maybe a)
-genMaybe = do
-  a <- arbitrary
-  elements [Nothing, Just a]
-
--- What QuickCheck does so you get more Just values
+genMaybe = do 
+    a <- arbitrary
+    elements [Nothing, Just a]
 
 genMaybe' :: Arbitrary a => Gen (Maybe a)
 genMaybe' = do
-  a <- arbitrary
-  frequency [ (1, return Nothing)
-            , (3, return (Just a))]
+    a <- arbitrary
+    frequency [ (1, return Nothing)
+              , (3, return (Just a))]
 
 -- frequency :: [(Int, Gen a)] -> Gen a
 
+-- Using QuickCheck without Hspec
 prop_additionGreater :: Int -> Bool
 prop_additionGreater x = x + 1 > x
 
