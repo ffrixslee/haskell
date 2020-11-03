@@ -37,13 +37,36 @@ main =
     quickCheck (arbitrary :: IdTest)
 -}
 
-data Two a b = Two a b deriving (Eq,Show)
+data Two a b = Two a b deriving (Eq, Show)
 
+--type TwoTest = Two String [Int]
+--type TwoAssoc =  TwoTest -> TwoTest -> TwoTest -> Bool
+ 
 instance (Semigroup a, Semigroup b) => Semigroup (Two a b) where
-    (Two a b) <> (Two a' b') = (Two a a') <> (Two b b')   
-
+    (Two a b) <> (Two a' b') = Two (a <> a') (b <> b')
+ 
 instance (Arbitrary a, Arbitrary b) => Arbitrary (Two a b) where
     arbitrary = do
       a <- arbitrary
       b <- arbitrary
       return (Two a b)
+
+type TwoAssoc = Two String [Int] -> Two String [Int] -> Two String [Int] -> Bool
+{-
+data Three a b c = Three a b c
+
+threeGen :: (Arbitrary a, Arbitrary b, Arbitrary c)
+            => Gen (Three a b c)
+threeGen = do
+    a <- arbitrary
+    b <- arbitrary
+    c <- arbitrary
+    return (a, b, c)
+
+type ThreeTest = Three Int Char String
+type ThreeAssoc = ThreeTest -> ThreeTest -> ThreeTest -> ThreeTest -> Bool
+
+instance (Semigroup a, Semigroup b, Semigroup c) => Gen (Three a b c) where
+    (Three a b c) <> (Three a' b' c') <> (Three a'' b'' c'') = Three (a a' a'')
+-}
+
