@@ -1,12 +1,14 @@
 module Test where
 
+-- to select and replace all instances of a word: cmd+shift+L
+
 --import Control.Monad
 import Data.Monoid
 import Data.Semigroup
 import Test.QuickCheck 
 import MonoidSpec
 
-{-
+
 -- 1.
 
 data Trivial = Trivial deriving (Eq, Show)
@@ -34,9 +36,9 @@ genTrivial :: Gen Trivial
 genTrivial = 
     return Trivial
 
--}
 
-{-
+
+
 -- 2.
 
 newtype Identity a = Identity a deriving (Eq, Show)
@@ -67,7 +69,7 @@ main =
     quickCheck (semigroupAssoc :: IdAssoc)
 
 
-{-
+
 --Just for fun:
 genId :: Arbitrary a => Gen (Identity a)
 genId = do
@@ -77,11 +79,11 @@ instance Arbitrary a => Arbitrary (Identity a) where
     arbitrary = genId
 identityGenInt :: Gen (Identity Int)
 identityGenInt = genId
--}
 
--}
 
-{-
+
+
+
 -- 3.
 
 data Two a b = Two a b deriving (Eq, Show)
@@ -111,9 +113,9 @@ main :: IO()
 main = 
     quickCheck (semigroupAssoc :: GenTwoAssoc)
 
--}
 
-{-
+
+
 -- 4. 
 
 data Three a b c = Three a b c deriving (Eq, Show)
@@ -144,9 +146,9 @@ main :: IO()
 main = 
     quickCheck (semigroupAssoc :: GenThreeAssoc)
 
--}
 
-{-
+
+
 -- 5.
 
 data Four a b c d = Four a b c d deriving (Eq, Show)
@@ -178,9 +180,9 @@ main :: IO()
 main = 
     quickCheck (semigroupAssoc :: GenFourAssoc)
 
--}
 
-{-
+
+
 -- 6.
 
 newtype BoolConj = 
@@ -207,9 +209,9 @@ type GenBoolConjAssoc =
 main :: IO()
 main =
     quickCheck (semigroupAssoc :: GenBoolConjAssoc)
--}
 
-{-
+
+
 -- 7.
 
 newtype BoolDisj = 
@@ -237,9 +239,9 @@ type GenBoolDisjAssoc =
 main :: IO()
 main =
     quickCheck (semigroupAssoc :: GenBoolDisjAssoc)
--}
 
-{-
+
+
 -- 8.
 data Or a b =
     Fst a
@@ -272,9 +274,9 @@ type OrAssoc =
 main :: IO()
 main =
     quickCheck (semigroupAssoc :: OrAssoc)
--}
 
-{-
+
+
 -- 9.
 newtype Combine a b =
     Combine { unCombine :: (a -> b) }
@@ -293,9 +295,9 @@ semigroupAssoc a b c =
     (a <> (b <> c)) == ((a <> b) <> c)
 
 -- Can't seem to quickCheck the functions
--} 
+ 
 
-{-
+
 -- 10.
 
 newtype Comp a = 
@@ -325,9 +327,9 @@ main =
 
 -- Also can't quickCheck the function
 
--}
 
-{-
+
+
 -- 11.
 
 data Validation a b =
@@ -365,9 +367,9 @@ main = do
         --print $ success 1 <> success 2
         --print $ failure "woot" <> success 2
     quickCheck (semigroupAssoc :: ValAssoc)
--}
 
-{-
+
+
 
 -- Monoid exercises
 
@@ -402,9 +404,9 @@ main = do
   quickCheck (mli :: Trivial -> Bool)
   quickCheck (mlr :: Trivial -> Bool)
 
--}
 
-{-
+
+
 -- 2.
 newtype Identity a = Identity a deriving (Eq, Show)
 
@@ -442,9 +444,9 @@ main = do
   quickCheck (mli :: IdType -> Bool)
   quickCheck (mlr :: IdType -> Bool)
 
--}
 
-{-
+
+
 -- 3.
 
 data Two a b = Two a b deriving (Eq, Show)
@@ -482,9 +484,9 @@ main = do
   quickCheck (sa :: GenTwoAssoc)
   quickCheck (mli :: GenTwoType -> Bool)
   quickCheck (mlr :: GenTwoType -> Bool)
--}
 
-{-
+
+
 -- 4.
 
 newtype BoolConj = 
@@ -520,9 +522,9 @@ main = do
   quickCheck (sa :: GenBoolConjAssoc)
   quickCheck (mli :: BoolConj -> Bool)
   quickCheck (mlr :: BoolConj -> Bool)
--}
 
-{-
+
+
 -- 5.
 
 newtype BoolDisj = 
@@ -557,8 +559,8 @@ main = do
   quickCheck (sa :: GenBoolDisjAssoc)
   quickCheck (mli :: BoolDisj -> Bool)
   quickCheck (mlr :: BoolDisj -> Bool)
--}
-{-
+
+
 -- 6.
 newtype Combine a b =
     Combine { unCombine :: (a -> b) }
@@ -580,9 +582,9 @@ semigroupAssoc a b c =
     (a <> (b <> c)) == ((a <> b) <> c)
 
 -- Can't seem to quickCheck the functions
--}
 
-{-
+
+
 -- 7.
 newtype Comp a = 
     Comp { unComp :: (a -> a)}
@@ -613,7 +615,7 @@ main =
     quickCheck (semigroupAssoc :: CompAssoc)
 
 -- Also can't quickCheck the function
--}
+
 
 -- 8.
 
