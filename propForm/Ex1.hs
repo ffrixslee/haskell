@@ -103,23 +103,34 @@ subst (V x1) (x3, x4)
 substAll :: Form -> [(String, Bool)] -> Form
 substAll = foldl subst
 
-{-
 -- Evaluation of a formula (evalSubst)
 evalSubst :: Form -> [(String, Bool)] -> Bool
-evalSubst (V x1) (x3, x4) 
-          | (x1 == x3) = True
-          | (x1 /= x3) = False
---          | _ = simplifyConst substAll (V x1) (x3, x4) 
--}
+evalSubst (V x1) [(x2, b)] = go (V x1) [(x2, b)]
+    where go (V x1) [(x2, b)]
+           | (x1 == x2) = True
+           | (x1 /= x2) = False
+           | otherwise = go $ simplifyConst $ substAll (V x1) [(x2, b)]
 
+
+{-
 -- Model finding
 models :: Form -> [(String, Bool)] -> [String] -> [[(String, Bool)]]
+models f vl [] = evalSubst v 
+models f vl =
+    | True -> [vl]
+    | _ -> []
 
+-- if there are still variables to be processed
+models f vl (vn : vns) = call (models f (vn, True):vl) vns)
 
+models f vl (vn : vns) = call (models f ((vn, False):vl) vns)
 
+--- using go recursion
+factorial n = go n 1
+    where 
+        go n res
+            | n >1 = go (n - 1)( res * n)
+            | otherwise = res
 
-
-
-
-
-
+-- go is an auxiliary function which actually performs the factorial calculation. res is the accumulator.
+-}
