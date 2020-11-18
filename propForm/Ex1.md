@@ -110,7 +110,69 @@ substAll :: Form -> [(String, Bool)] -> Form
 substAll = foldl subst
 ```
 
-# Exercise 10(pending)
+# Exercise 10
+```hs
+-- Evaluation of a formula (evalSubst)
+evalSubst :: Form -> [(String, Bool)] -> Bool
+evalSubst (V x1) v = getBooley $ simplifyConst $ substAll (V x1) v
+
+getBooley x = 
+    case x  of
+      x
+        | (x == C True) -> True
+        | (x == C False) -> False
+
+
+{-
+evalSubst (V x1) [(x2, b)] = go (V x1) [(x2, b)]
+    where go (V x1) [(x2, b)]
+           | (x1 == x2) = True
+           | (x1 /= x2) = False
+           | otherwise = go $ simplifyConst $ substAll (V x1) [(x2, b)]
+-}
+```
+
+# Exercise 11
+```hs
+-- Model finding
+models :: Form -> [(String, Bool)] -> [String] -> [[(String, Bool)]]
+models f vl [] 
+    | evalSubst f vl == True = [vl]
+    | otherwise = []
+
+-- if there are still variables to be processed
+models f vl (vn : vns) = (models f ((vn, True):vl) vns)
+models f vl (vn : vns) = (models f ((vn, False):vl) vns)
+
+models f vl (vn : vns) =  (models f ((vn, True):vl) vns) ++ (models f ((vn, False):vl) vns)
+```
+
+# Exercise 12
+```hs
+allModels :: Form -> [[(String, Bool)]]
+allModels f  = models f [] (fvList f)
+```
+
+# Exercise 13
+```hs
+unsatisfiable :: Form -> Bool
+unsatisfiable f = null (allModels f)
+```
+
+# Exercise 14
+```hs
+valid :: Form -> Bool
+valid x1 = unsatisfiable $ (Not x1)
+```
+--- 
+
+# Exercise 15
+
+# Exercise 17
+```hs 
+divThreeAny = any (\x -> (x `mod` 3 == 0)) [1, 4, 5, 6]
+divThreeAll = all (\x -> (x `mod` 3 == 0)) [1, 4, 5, 6]
+```
 
 
 
