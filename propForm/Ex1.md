@@ -167,7 +167,21 @@ valid x1 = unsatisfiable $ (Not x1)
 --- 
 
 # Exercise 15
+```hs
+data Rule = Rl String [String]
+data Goal = Gl [String]
+data Prog = Pr String [String] 
+```
+# Exercise 16
+subforms :: Form -> [Form]
+subforms (P n) = [(P n)]
+subforms (Conj f1 f2) = (Conj f1 f2):(subforms f1 ++ subforms f2)
+subforms (Disj f1 f2) = (Disj f1 f2):(subforms f1 ++ subforms f2)
+subforms (Neg f) = (Neg f):(subforms f)
 
+This gives, e.g.:
+IAR> subforms (Neg (Disj (P 1) (Neg (P 2))))
+[~(P1 v ~P2),(P1 v ~P2),P1,~P2,P2]
 # Exercise 17
 ```hs 
 divThreeAny = any (\x -> (x `mod` 3 == 0)) [1, 4, 5, 6]

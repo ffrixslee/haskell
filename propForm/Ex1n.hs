@@ -124,7 +124,6 @@ substAll = foldl subst
 -- Evaluation of a formula (evalSubst)
 evalSubst :: Form -> [(String, Bool)] -> Bool
 evalSubst (V x1) v = getBooley $ simplifyConst $ substAll (V x1) v
-evalSubst _ _ = False
 
 getBooley x = 
     case x of
@@ -176,72 +175,18 @@ mortalSocrates :: Prog
 mortalSocrates
     = Pr
     [
-    Rl "h" [],
     Rl "m" ["h"]
-    ]
-    (Gl ["m"])
-
-immortalSocrates :: Prog
-immortalSocrates
-    = Pr
-    [
-    Rl "h" [],
-    Rl "h" ["m"]
     ]
     (Gl ["m"])
 
 abcdProg :: Prog
 abcdProg
-    = Pr
-    [Rl "a" [],
-    Rl "d" ["b", "c"],
-    Rl "d" ["a", "c"],
-    Rl "c" ["a"]
-    ]
-    (Gl ["d", "c"])
-
-
--- Exercise 16 
--- The issue is that the variables in ruleToForm, goalToForm and progToForm need to be converted from Strings to Form.
-varToForm :: String -> Form
-varToForm x = V x
-
-varsToForm :: [String] -> [Form]
-varsToForm xs = map V xs  
-
--- Rules involve implication (head implies body)
-ruleToForm :: Rule -> Form
-ruleToForm (Rl x y) = implies (varToForm x) (conj $ varsToForm y) 
-
-goalToForm :: Goal -> [Form]
-goalToForm (Gl x) = varsToForm x
-
-progToForm :: Prog -> Form 
-progToForm (Pr x y) = implies (conj (map ruleToForm x)) (conj (goalToForm y) )
-
---Auxiliary functions:
-
--- P ⇒ Q (If P then Q)
-implies :: Form -> Form -> Form
-implies x y = (Not x) `Or` y  
-
--- A conjuction of formulas in a list
-conj :: [Form] -> Form
-conj xs = foldl And (C True) xs
-
---If you like, write down conj as a recursion over lists(pending)
-
--- Exercise 17 (Any and All)
-divThreeAny = any (\x -> (x `mod` 3 == 0)) [1, 4, 5, 6]
-divThreeAll = all (\x -> (x `mod` 3 == 0)) [1, 4, 5, 6]
-
--- Exercise 18 (List comprehension)
-sqrNeg = [x^2 | x <- [1, -3, 4, -5], x<0 ]
-
--- Pending:
-rules y = [y | y <- rules abcdProg, head y == "d"]
--- Exercise 19
--- Exercise 20 
-
+  = Pr
+  [Rl "a" [],
+  Rl "d" ["b", "c"],
+  Rl "d" ["a", "c"],
+  Rl "c" ["a"]
+  ]
+  (Gl ["d", "c"])
 
 

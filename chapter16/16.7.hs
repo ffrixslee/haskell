@@ -1,5 +1,14 @@
--- Add **fmap**, **parentheses**, and **function composition** to each expression as needed
+a = fmap (+1) $ read "[1]" :: [Int]
 
--- a = fmap (+1) $ read "[1]" :: [Int] 
---b = fmap (++ "lol")  ("Hello", "Hi,") wrong !
---c = fmap (*2) (\x -> x - 2)
+b = (fmap . fmap) (++ "lol") (Just ["Hi,", "Hello"])
+
+c = fmap (*2) (\x -> (x - 2))
+
+d =
+    fmap ((return '1' ++) . show)
+    (\x -> [x, 1..3])
+
+e :: IO Integer
+e = let ioi = readIO "1" :: IO Integer
+        changed = fmap (fmap read (fmap ("123"++) show)) ioi
+    in fmap (*3) changed
