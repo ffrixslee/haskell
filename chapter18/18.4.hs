@@ -1,12 +1,3 @@
-{-
-twiceWhenEven :: [Integer] -> [Integer]
-twiceWhenEven xs = do
-    x <- xs
-    if even x
-        then [x*x, x*x]
-        else []
--}
-
 import Control.Monad (ap)
 
 data Sum a b =  
@@ -33,3 +24,5 @@ instance Monad (Sum a) where
   return = pure
   (First a) >>= _ = First a
   (Second b) >>= f = f b
+
+  
