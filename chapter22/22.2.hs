@@ -1,3 +1,4 @@
+-- Short Exercise: Warming up
 import Data.Char
 
 cap :: [Char] -> [Char]
@@ -7,16 +8,19 @@ rev :: [Char] -> [Char]
 rev xs = reverse xs
 
 composed :: [Char] -> [Char]
-composed = rev . cap
+composed = cap . rev
 
 fmapped :: [Char] -> [Char]
-fmapped = fmap rev cap
+fmapped = fmap cap rev
 
-tupled :: [Char] -> ([Char], [Char])
-tupled = do 
-    a <- cap
-    b <- rev
-    return (b,a)
+tupled :: [Char] -> ([Char],[Char])
+tupled = (,) <$> cap <*> rev
 
-tups :: [Char] -> ([Char], [Char])
-tups = rev >>= fmap (,) cap
+monadFun :: [Char] -> ([Char],[Char])
+monadFun = do
+    x <- cap
+    y <- rev
+    return (x,y)
+
+bindFun :: [Char] -> ([Char],[Char])
+bindFun = cap >>= fmap (,) rev
