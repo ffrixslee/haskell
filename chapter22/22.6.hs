@@ -1,6 +1,5 @@
 {-# LANGUAGE InstanceSigs #-}
 
-
 -- 1.
 
 myLiftA2 :: Applicative f =>
@@ -38,14 +37,10 @@ instance Applicative (Reader r) where
     pure :: a -> Reader r a
     pure a = Reader (\r -> a)
 
-    Reader f <*> Reader g =
-        Reader (\r -> f r (g r))
-
+    (Reader rab) <*> (Reader ra) =
+        Reader $ (\r -> (rab <*> ra) r)
 {-
     (<*>) :: Reader r (a -> b)
           -> Reader r a
           -> Reader r b
-    (Reader rab) <*> (Reader ra) = 
-        Reader $ \r -> ???
-
-        -}
+-}
