@@ -1,22 +1,22 @@
 -- Exercises: Evaluate
 
 -- 1.
-const 1 undefined
+ex1 = const 1 undefined
 
 -- 2.
-const undefined 1
+ex2 = const undefined 1
 
 -- 3. 
-flip const undefined 1
+ex3 = flip const undefined 1
 
 -- 4. 
-flip const 1 undefined
+ex4 = flip const 1 undefined
 
 -- 5. 
-const undefined undefined
+ex5 = const undefined undefined
 
 --6. 
-foldr const 'z' ['a'..'e']
+ex6 = foldr const 'z' ['a'..'e']
 
 --7.
-foldr (flip const) 'z' ['a'..'e']
+ex7 = foldr (flip const) 'z' ['a'..'e']
